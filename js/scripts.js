@@ -1,6 +1,4 @@
-//esto se puede en archivo distinto, la definciion de clase
 
-//this version will be improved, creating just objects when new user is
 
 
 class Usuario{
