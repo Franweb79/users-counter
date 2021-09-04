@@ -124,22 +124,53 @@ function showUsers(){
 
     let divUsers=document.getElementById("users");
 
-    let list=document.createElement("LI");
+    let list="";
 
-    divUsers.appendChild(list);
+    let ulElement="";
+
+    let textNode="";
+
+
+    
+
+    if(usersArray.length==0){
+
+        ulElement=document.createElement("UL");
+        divUsers.appendChild(ulElement);
+
+        list=document.createElement("LI");
+        ulElement.appendChild(list);
+
+        textNode=document.createTextNode("no hay usuarios");
+        list.appendChild(textNode);
+
+
+
+
+
+    }
 
 
     //show users array on console
     for(let i=0;i<usersArray.length;++i){
 
-        let ulElement=document.createElement("UL");
+        ulElement=document.createElement("UL");
+        divUsers.appendChild(ulElement);
 
-        list.appendChild(ulElement);
+        list=document.createElement("LI");
+        ulElement.appendChild(list);
 
-        let textElement=document.createTextNode(`nombre del usuario ${usersArray[i].nombre}, veces que aparece el usuario ${usersArray[i].vecesLista}`);
+        textNode=document.createTextNode(`nombre del usuario ${usersArray[i].nombre}, veces que aparece el usuario ${usersArray[i].vecesLista}`);
 
-        console.log(textElement);
-        ulElement.appendChild(textElement);
+        list.appendChild(textNode);
+
+        
+
+        //list.appendChild(ulElement);
+
+
+        console.log(textNode);
+        //ulElement.appendChild(textElement);
         console.log(usersArray[i]);
     }
 
@@ -157,51 +188,64 @@ because that way be can show the original he types to the user
 
 */
 
+if(promptedUserName !=null){
 
-sanytizeString(promptedUserName);
+    sanytizeString(promptedUserName);
 
-checkIfSanitizedUserNameIsNotValid();
+    checkIfSanitizedUserNameIsNotValid();
+
+    //add object to array, 1 is because it appears at least 1 time
+    usuario=new Usuario(sanitizedUserName,1);
+    usersArray.push(usuario);
+
+    proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+
+}
 
 
 
-//add object to array, 1 is because it appears at least 1 time
-usuario=new Usuario(sanitizedUserName,1);
-usersArray.push(usuario);
-
-proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
 
 
 
-while(proceed==true){
+
+
+
+while(proceed==true && promptedUserName !=null){
 
 
     
 
     promptedUserName=prompt("enter new user name");
 
-    sanytizeString(promptedUserName);
+    if(promptedUserName !=null){
 
-    checkIfSanitizedUserNameIsNotValid();
+        sanytizeString(promptedUserName);
 
-    compareUser(sanitizedUserName,usersArray);
-    //compareUser2(userName);
+        checkIfSanitizedUserNameIsNotValid();
 
-    /*
-    
-        we compare with the names on the objects of the array, 
+        compareUser(sanitizedUserName,usersArray);
+        //compareUser2(userName);
+
+        /*
         
-        if it exists, we add 1 to the vecesLista property of the object; 
-        if doesnt exist, we create a new object with that name and set times 
-        it appears on the list to 1 (and push it to the array objects of course)
-    */
+            we compare with the names on the objects of the array, 
+            
+            if it exists, we add 1 to the vecesLista property of the object; 
+            if doesnt exist, we create a new object with that name and set times 
+            it appears on the list to 1 (and push it to the array objects of course)
+        */
 
 
 
-    /*usuario=new Usuario(userName,1);
-    usersArray.push(usuario);*/
+        /*usuario=new Usuario(userName,1);
+        usersArray.push(usuario);*/
 
 
-    proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+        proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+
+    }
+
+    
 }//while
 
 
