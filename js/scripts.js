@@ -14,33 +14,118 @@ class Usuario{
 
     sumarVez(){
         this.vecesLista++;
-        console.log("user importado");
+       
 
     }
 
 }
 
+
 let usersArray=[];
 
-let nombreUsuario=prompt("enter new user name");
+let promptedUserName="";
 
-let proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+let sanitizedUserName="";
+
+
+let proceed=false;
+
+
+
+
+
+
+
+
+
+
+/*
+
+    we will trim the string and all to lowercase, 
+    to check if it is valid later on another function(no blank spaces and so)
+
+*/
+
+function sanytizeString(p_userName){
+
+    sanitizedUserName=p_userName.trim();
+
+    sanitizedUserName=sanitizedUserName.toLowerCase();
+
+   
+
+   
+
+
+}
+
+/*
+    function to check if sanitizxed user name is length 0 (whitespaces), null...
+
+*/
+function  checkIfSanitizedUserNameIsNotValid(){
+
+
+    //let sanitizedUserName=sanytizeString(p_userName);
+
+    //from now on we work with this string sanitized
+
+    console.log (sanitizedUserName);
+    console.log (sanitizedUserName.length);
+
+    
+    /*
+        if it is not valid, we keep pon asking for valid name until 
+
+    */
+   while(sanitizedUserName === null || sanitizedUserName.length== 0){
+
+       promptedUserName=prompt("invalid user name, please don´t use blank data; enter new user name");
+
+       sanytizeString(promptedUserName);
+      
+    }
+}
+
+
+promptedUserName=prompt("enter new user name");
+
+/* sainitized name will be stored on 
+ 'sanitizedUserName' variable
+
+we keep the variable promptedUserName and use another one for sanitized name.
+because that way be can show the original he types to the user
+
+*/
+
+
+sanytizeString(promptedUserName);
+
+checkIfSanitizedUserNameIsNotValid();
 
 
 
 //add object to array, 1 is because it appears at least 1 time
-usuario=new Usuario(nombreUsuario,1);
+usuario=new Usuario(sanitizedUserName,1);
 usersArray.push(usuario);
+
+proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+
+
 
 while(proceed==true){
 
 
     
 
-    let nombreUsuario=prompt("enter new user name");
+    promptedUserName=prompt("enter new user name");
 
-    compareUser(nombreUsuario,usersArray);
-    //compareUser2(nombreUsuario);
+    sanytizeString(promptedUserName);
+
+    checkIfSanitizedUserNameIsNotValid();
+
+    compareUser(sanitizedUserName,usersArray);
+    //compareUser2(userName);
 
     /*
     
@@ -53,7 +138,7 @@ while(proceed==true){
 
 
 
-    /*usuario=new Usuario(nombreUsuario,1);
+    /*usuario=new Usuario(userName,1);
     usersArray.push(usuario);*/
 
 
