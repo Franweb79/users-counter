@@ -85,63 +85,6 @@ function  checkIfSanitizedUserNameIsNotValid(){
 }
 
 
-promptedUserName=prompt("enter new user name");
-
-/* sainitized name will be stored on 
- 'sanitizedUserName' variable
-
-we keep the variable promptedUserName and use another one for sanitized name.
-because that way be can show the original he types to the user
-
-*/
-
-
-sanytizeString(promptedUserName);
-
-checkIfSanitizedUserNameIsNotValid();
-
-
-
-//add object to array, 1 is because it appears at least 1 time
-usuario=new Usuario(sanitizedUserName,1);
-usersArray.push(usuario);
-
-proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
-
-
-
-while(proceed==true){
-
-
-    
-
-    promptedUserName=prompt("enter new user name");
-
-    sanytizeString(promptedUserName);
-
-    checkIfSanitizedUserNameIsNotValid();
-
-    compareUser(sanitizedUserName,usersArray);
-    //compareUser2(userName);
-
-    /*
-    
-        we compare with the names on the objects of the array, 
-        
-        if it exists, we add 1 to the vecesLista property of the object; 
-        if doesnt exist, we create a new object with that name and set times 
-        it appears on the list to 1 (and push it to the array objects of course)
-    */
-
-
-
-    /*usuario=new Usuario(userName,1);
-    usersArray.push(usuario);*/
-
-
-    proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
-}
-
 
 /*
     to compare new entered name with already existing names
@@ -202,6 +145,65 @@ function showUsers(){
 
 
 }
+
+
+promptedUserName=prompt("enter new user name");
+
+/* sainitized name will be stored on 
+ 'sanitizedUserName' variable
+
+we keep the variable promptedUserName and use another one for sanitized name.
+because that way be can show the original he types to the user
+
+*/
+
+
+sanytizeString(promptedUserName);
+
+checkIfSanitizedUserNameIsNotValid();
+
+
+
+//add object to array, 1 is because it appears at least 1 time
+usuario=new Usuario(sanitizedUserName,1);
+usersArray.push(usuario);
+
+proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+
+
+
+while(proceed==true){
+
+
+    
+
+    promptedUserName=prompt("enter new user name");
+
+    sanytizeString(promptedUserName);
+
+    checkIfSanitizedUserNameIsNotValid();
+
+    compareUser(sanitizedUserName,usersArray);
+    //compareUser2(userName);
+
+    /*
+    
+        we compare with the names on the objects of the array, 
+        
+        if it exists, we add 1 to the vecesLista property of the object; 
+        if doesnt exist, we create a new object with that name and set times 
+        it appears on the list to 1 (and push it to the array objects of course)
+    */
+
+
+
+    /*usuario=new Usuario(userName,1);
+    usersArray.push(usuario);*/
+
+
+    proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+}//while
+
 
 
 
