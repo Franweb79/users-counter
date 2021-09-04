@@ -1,6 +1,5 @@
 
 
-
 class Usuario{
     constructor(p_nombre,p_vecesLista)
     {
