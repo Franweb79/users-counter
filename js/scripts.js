@@ -1,5 +1,9 @@
 //esto se puede en archivo distinto, la definciion de clase
-class Usuario{
+
+//this version will be improved, creating just objects when new user is
+
+
+export class Usuario{
     constructor(p_nombre,p_vecesLista)
     {
         this.nombre=p_nombre;
@@ -10,7 +14,10 @@ class Usuario{
 
     sumarVez(){
         this.vecesLista++;
+        console.log("user importado");
+
     }
+
 }
 
 let arrayUsuarios=[];
