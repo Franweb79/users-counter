@@ -38,19 +38,27 @@ let proceed=false;
 
 /*
 
-    we will trim the string and all to lowercase, 
+   if parameter is not null, we will trim the string and all to lowercase, 
     to check if it is valid later on another function(no blank spaces and so)
+    if parameter is null, we just return null, that means "close" button of the prompt was clicked
 
 */
 
 function sanytizeString(p_userName){
 
-    sanitizedUserName=p_userName.trim();
+    if(p_userName !=null)
+    {
+        sanitizedUserName=p_userName.trim();
 
-    sanitizedUserName=sanitizedUserName.toLowerCase();
+        sanitizedUserName=sanitizedUserName.toLowerCase();
 
+    }
+    else
+    {
+        sanitizedUserName=null;
+    }
    
-
+    console.log(sanitizedUserName);
    
 
 
@@ -58,6 +66,10 @@ function sanytizeString(p_userName){
 
 /*
     function to check if sanitizxed user name is length 0 (whitespaces), null...
+    We must ALWAYS check if sanitizedUserName -the variable changed in this function-,
+    is null because it could be; reason is, if it is null it means user clicked "close"
+    on the prompt button and we must not do certain operations which will be done if
+    sanitizedUserName is not null
 
 */
 function  checkIfSanitizedUserNameIsNotValid(){
@@ -73,13 +85,20 @@ function  checkIfSanitizedUserNameIsNotValid(){
     
     /*
         if it is not valid, we keep pon asking for valid name until 
-
+        this condition means, 
+        if close button on the prompt is not clicked (that button returns null)
+        if the length of the sanitized name is not 0 (that means, an empty string, or
+        user clicked "accept" button of the prompt with empty string, 
+        which makes string to be o length )
     */
-   while(sanitizedUserName === null || sanitizedUserName.length== 0){
+   while(sanitizedUserName !==null && sanitizedUserName.length== 0  ){
 
        promptedUserName=prompt("invalid user name, please don´t use blank data; enter new user name");
-
+       console.log ("promt"+promptedUserName);
        sanytizeString(promptedUserName);
+       console.log ("san"+sanitizedUserName);
+
+       //console.log(sanitizedUserName);
       
     }
 }
@@ -195,10 +214,15 @@ if(promptedUserName !=null){
     checkIfSanitizedUserNameIsNotValid();
 
     //add object to array, 1 is because it appears at least 1 time
-    usuario=new Usuario(sanitizedUserName,1);
-    usersArray.push(usuario);
+    if(sanitizedUserName !==null){
 
-    proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+        usuario=new Usuario(sanitizedUserName,1);
+        usersArray.push(usuario);
+
+        proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+
+    }
+    
 
 }
 
@@ -223,25 +247,31 @@ while(proceed==true && promptedUserName !=null){
 
         checkIfSanitizedUserNameIsNotValid();
 
-        compareUser(sanitizedUserName,usersArray);
-        //compareUser2(userName);
+        //inside check... function could return a null, so we must control it
+        if(sanitizedUserName !==null){
 
-        /*
-        
-            we compare with the names on the objects of the array, 
+            compareUser(sanitizedUserName,usersArray);
+            //compareUser2(userName);
+
+            /*
             
-            if it exists, we add 1 to the vecesLista property of the object; 
-            if doesnt exist, we create a new object with that name and set times 
-            it appears on the list to 1 (and push it to the array objects of course)
-        */
+                we compare with the names on the objects of the array, 
+                
+                if it exists, we add 1 to the vecesLista property of the object; 
+                if doesnt exist, we create a new object with that name and set times 
+                it appears on the list to 1 (and push it to the array objects of course)
+            */
 
 
 
-        /*usuario=new Usuario(userName,1);
-        usersArray.push(usuario);*/
+            /*usuario=new Usuario(userName,1);
+            usersArray.push(usuario);*/
 
 
-        proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+            proceed=confirm("do you want to add another user? Please accept to do it or cancel if you have finished.");
+
+        }
+        
 
     }
 
